@@ -1,8 +1,8 @@
 ﻿![realm-logo](https://github.com/realm/realm-cocoa/raw/master/logo.png)
 # Realm Ready
 
-This repo covers a basic implementation for RealmSwift in the iOS-starter-kit.
-The main purpose is to offer a fast -yet efficient- implementation for RealmSwift; for any further informations, please check the [official Realm Documentation](https://www.realm.io/docs/swift/latest/).
+This repo covers a basic ready-to-go implementation of RealmSwift in the iOS-starter-kit.
+The main purpose is to offer a fast -yet efficient- implementation of the persistance feature in the starter kit; for any further informations, please check the [official Realm Documentation](https://www.realm.io/docs/swift/latest/).
 
 ## Installation
 
@@ -37,6 +37,12 @@ Model ->> Model: do stuff with model objects
 DTO-->Model: Persist data
 Model ->> DTO: map
 ```
+
+>Persisting objects must subclass **`Object`**
+
+>Realm model properties must have the **`@objc dynamic var`** attribute to become accessors for the underlying database data.
+
+Please refer to this [Realm property cheatsheet](https://www.realm.io/docs/swift/latest/#property-cheatsheet).
 
 ## Queries
 
@@ -98,4 +104,3 @@ Realm will update the existing stored data with the new ones by looking for the 
 ## Migration
 
 Coming soon
-
