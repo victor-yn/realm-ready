@@ -10,11 +10,20 @@ Add `pod 'RealmSwift','~> 3.3.1'` in your Podfile and make the magic happen (`po
 
 ## Examples
 
-The examples files can easily be added to your project; to do that :
+- **DataManager**
+- *Realm*
+	- **RProvider**
+	- *mapper*
+		- **ItemRMapper**
+	- *dto*
+		- **ItemRDto**
 
-- Download the files as a .zip
-- Extract them
-- 
+> R will now stand for Realm, AF for Alamofire.
+> ItemDto : `ItemRDto` / `ItemAFDto`
+
+The example files can easily be added to your project; to do that just download the files (`Clone or download` -> `Download ZIP`). 
+
+It will show you the implementation for fetching / saving and clearing data. From now on you're ready to go.
 
 ## Models
 
@@ -24,31 +33,69 @@ Models will be persisted as DTOs.
 sequenceDiagram
 DTO-->Model: Fetch persisted data
 DTO ->> Model: map
-Model ->> Model: do stuff with models
+Model ->> Model: do stuff with model objects
 DTO-->Model: Persist data
 Model ->> DTO: map
 ```
 
 ## Queries
 
-sqd
+ ```Swift
+let itemRDtos = realm.objects(ItemRDto.self) //this will not load the fetched objects into memory
+```
+>All queries (including queries and property access) are lazy in Realm. Data is only read when the properties are accessed.
+
 ### Filter
 
-You can filter 
-Please check the [NSPredicate Cheatsheet](https://academy.realm.io/posts/nspredicate-cheatsheet/).
+Please check the [NSPredicate Cheatsheet](https://academy.realm.io/posts/nspredicate-cheatsheet/) for the predicate string syntax.
 
  ```Swift
-var itemRDtos = realm.objects(ItemRDto.self).filter("title = 'example' AND description BEGINSWITH 'I'")
+var filteredItemRDtos = itemRDtos.filter("title = 'example' AND description BEGINSWITH 'I'")
 ```
 
-[For more information](https://www.realm.io/docs/swift/latest/#filtering)
+[More information](https://www.realm.io/docs/swift/latest/#filtering)
+
 ### Sorting
 
-You can sort 
-
  ```Swift
-var sortedItemRDtos = itemRDtos.sorted(byKeyPath: "title")
+var sortedItemRDtos = itemRDtos.sorted(byKeyPath: "title", ascending: true)
 ```
 
-[For more information](https://www.realm.io/docs/swift/latest/#sorting)
+[More information](https://www.realm.io/docs/swift/latest/#sorting)
+
+
+## Useful quick tips
+
+- **Always** set a primary key for any DTO model you are going to use.
+ ```Swift
+	override static func primaryKey() -> String? {
+			return "id"
+	}
+```
+Realm will update the existing stored data with the new ones by looking for the primary key.
+
+> Without this, you will have to delete all the persisted data and then persist the new ones; huge performance costs.
+
+- **Always** force `update: true` when updating persisted data.
+ ```Swift
+	try realm.write {
+			realm.add(dto, update: true)
+	}
+```
+
+
+- Delete the Realm file from disk
+
+ ```Swift
+		do {
+			try FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
+		} catch {}
+```
+
+[More information about deleting Realm files](https://www.realm.io/docs/swift/latest/#deleting-realm-files)
+
+
+## Migration
+
+Coming soon
 
