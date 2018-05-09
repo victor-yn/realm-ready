@@ -2,7 +2,8 @@
 # Realm Ready
 
 This repo covers a basic ready-to-go implementation of RealmSwift in the iOS-starter-kit.
-The main purpose is to offer a fast -yet efficient- implementation of the persistance feature in the starter kit; for any further informations, please check the [official Realm Documentation](https://www.realm.io/docs/swift/latest/).
+
+The main purpose is to offer a fast -yet efficient- implementation of the persistance feature in the starter kit; for any further information, please check the [official Realm Documentation](https://www.realm.io/docs/swift/latest/).
 
 ## Installation
 
@@ -31,14 +32,16 @@ Models will be persisted as DTOs.
 
 ```mermaid
 sequenceDiagram
-DTO-->Model: Fetch persisted data
+
+DTO ->> DTO: realm.objects(DTO.self)
 DTO ->> Model: map
 Model ->> Model: do stuff with model objects
-DTO-->Model: Persist data
+Model ->> Model: do more stuff with model objects
 Model ->> DTO: map
+DTO ->> DTO: realm.add(DTO)
 ```
 
->Persisting objects must subclass **`Object`**
+>Persisting objects (DTOs) must subclass **`Object`**
 
 >Realm model properties must have the **`@objc dynamic var`** attribute to become accessors for the underlying database data.
 
@@ -82,12 +85,13 @@ Realm will update the existing stored data with the new ones by looking for the 
 
 > Without this, you will have to delete all the persisted data and then persist the new ones; huge performance costs.
 
-- **Always** force `update: true` when updating persisted data.
+- **Always** force `update: true` when updating/saving persisted data.
  ```Swift
 	try realm.write {
 			realm.add(dto, update: true)
 	}
 ```
+This will update existing `dto` objects in the database, looked up by its primary key. If it does not exist, it will be created and added to the database.
 
 
 - Delete the Realm file from disk
@@ -103,4 +107,4 @@ Realm will update the existing stored data with the new ones by looking for the 
 
 ## Migration
 
-Coming soon
+[Coming soon](https://www.realm.io/docs/swift/latest/#migrations)
