@@ -26,11 +26,15 @@ class DataManager {
 		return realmProvider.saveItems(items)
 	}
 	
-	fileprivate func _clearRItems() -> Observable<Void> {
-		return realmProvider.clearItems()
+	fileprivate func _deleteRItems(_ items: [Item]) -> Observable<Void> {
+		return realmProvider.deleteItems(items)
 	}
 	
-	fileprivate func _clearRData() -> Observable<Void> {
+	fileprivate func _deleteRItems() -> Observable<Void> {
+		return realmProvider.deleteAllItems()
+	}
+	
+	fileprivate func _clearRObjects() -> Observable<Void> {
 		return realmProvider.clear()
 	}
 }
@@ -49,11 +53,15 @@ extension DataManager {
 		return self._saveRItems(items)
 	}
 	
-	func clearRItems() -> Observable<Void> {
-		return self._clearRItems()
+	func deleteRItems(_ items: [Item]) -> Observable<Void> {
+		return self._deleteRItems(items)
 	}
 	
-	func clearRData() -> Observable<Void> {
-		return self._clearRData()
+	func deleteRItems() -> Observable<Void> {
+		return self._deleteRItems()
+	}
+	
+	func clearRObjects() -> Observable<Void> {
+		return self._clearRObjects()
 	}
 }

@@ -13,7 +13,7 @@ import RealmSwift
 class RealmProvider {
 	
 	let realm = try! Realm()
-	let itemsMapper = ItemRealmMapper()
+	let itemsMapper = ItemRMapper()
 	
 	func saveItems(_ incoming: [Item]) -> Observable<Void> {
 		return Observable.create({ (observer) -> Disposable in
@@ -50,7 +50,9 @@ class RealmProvider {
 	func getItemById(_ id: String) -> Observable<Item> {
 		return Observable.create{ observer in
 			do {
-				let object = self.realm.objects(ItemRDto.self).filter("id = '\(id)'").first
+				guard let object = self.realm.objects(ItemRDto.self).filter("id = '\(id)'").first else {
+					throw NSError()
+				}
 				let item = try self.itemsMapper.map(object)
 				observer.onNext(item)
 				observer.onCompleted()
@@ -62,7 +64,25 @@ class RealmProvider {
 		}
 	}
 	
-	func clearItems() -> Observable<Void> {
+	func deleteItems(_ incoming: [Item]) -> Observable<Void> {
+		return Observable.create({ (observer) -> Disposable in
+			do {
+				let idsToDelete = incoming.map { $0.id }
+				let objectsToDelete = self.realm.objects(ItemRDto.self).filter("id IN %@", idsToDelete)
+				try self.realm.write {
+					self.realm.delete(objectsToDelete)
+				}
+				observer.onNext(())
+				observer.onCompleted()
+			}
+			catch let error as NSError {
+				observer.onError(error)
+			}
+			return Disposables.create()
+		})
+	}
+	
+	func deleteAllItems() -> Observable<Void> {
 		return Observable.create({ (observer) -> Disposable in
 			do {
 				let itemsDto = self.realm.objects(ItemRDto.self)
