@@ -78,7 +78,7 @@ var sortedItemRDtos = itemRDtos.sorted(byKeyPath: "title", ascending: true)
 - **Always** set a primary key for any DTO model you are going to use.
  ```Swift
 	override static func primaryKey() -> String? {
-			return "id"
+		return "id"
 	}
 ```
 Realm will update the existing stored data with the new ones by looking for the primary key.
@@ -88,7 +88,7 @@ Realm will update the existing stored data with the new ones by looking for the 
 - **Always** force `update: true` when updating/saving persisted data.
  ```Swift
 	try realm.write {
-			realm.add(dto, update: true)
+		realm.add(dto, update: true)
 	}
 ```
 This will update existing `dto` objects in the database, looked up by its primary key. If it does not exist, it will be created and added to the database.
@@ -97,9 +97,9 @@ This will update existing `dto` objects in the database, looked up by its primar
 - Delete the Realm file from disk
 
  ```Swift
-		do {
-			try FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
-		} catch {}
+	do {
+		try FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
+	} catch {}
 ```
 
 [More information about deleting Realm files](https://www.realm.io/docs/swift/latest/#deleting-realm-files)
