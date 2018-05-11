@@ -26,6 +26,13 @@ The example files can easily be added to your project; to do that just download 
 
 It will show you the implementation for fetching / saving and clearing data. From now on you're ready to go.
 
+
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------
+------------------------------
 ## Models
 
 Models will be persisted as DTOs. 
