@@ -1,5 +1,5 @@
 //
-//  ItemRealmMapper.swift
+//  ItemRMapper.swift
 //  App
 //
 //  Created by Victor Yan on 04/05/2018.
@@ -9,10 +9,9 @@
 import Foundation
 import RealmSwift
 
-class ItemRealmMapper {
+class ItemRMapper {
 	
-	func map(_ optionalDto: ItemRealmDto?) throws -> Item {
-		let dto = try OptionalUtils.unwrap(optionalDto)
+	func map(_ dto: ItemRDto) throws -> Item {
 		let id = try OptionalUtils.unwrap(dto.id)
 		let title = try OptionalUtils.unwrap(dto.title)
 		let description = try OptionalUtils.unwrap(dto._description)
@@ -21,17 +20,16 @@ class ItemRealmMapper {
 		return Item(id: id, title: title, description: description, image: image)
 	}
 	
-	func map(_ optionalDto: Results<ItemRealmDto>?) throws -> [Item] {
-		let items = try OptionalUtils.unwrap(optionalDto)
+	func map(_ dto: Results<ItemRDto>) throws -> [Item] {
 		var mappedItems = [Item]()
-		for current in items {
+		for current in dto {
 			mappedItems.append(try self.map(current))
 		}
 		return mappedItems
 	}
 	
-	func map(_ item: Item) -> ItemRealmDto {
-		let dto = ItemRealmDto()
+	func map(_ item: Item) -> ItemRDto {
+		let dto = ItemRDto()
 		dto.id = item.id
 		dto._description = item.description
 		dto.image = item.image
@@ -39,8 +37,8 @@ class ItemRealmMapper {
 		return dto
 	}
 	
-	func map(_ items: [Item]) -> [ItemRealmDto] {
-		var mappedDto = [ItemRealmDto]()
+	func map(_ items: [Item]) -> [ItemRDto] {
+		var mappedDto = [ItemRDto]()
 		for current in items {
 			mappedDto.append(map(current))
 		}

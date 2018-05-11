@@ -30,17 +30,8 @@ It will show you the implementation for fetching / saving and clearing data. Fro
 
 Models will be persisted as DTOs. 
 
-```mermaid
-sequenceDiagram
 
-DTO ->> DTO: realm.objects(DTO.self)
-DTO ->> Model: map
-Model ->> Model: do stuff with model objects
-Model ->> Model: do more stuff with model objects
-Model ->> DTO: map
-DTO ->> DTO: realm.add(DTO)
-```
-
+![mermaid graph](https://image.ibb.co/cPEqbJ/azzzz.png)
 >Persisting objects (DTOs) must subclass **`Object`**
 
 >Realm model properties must have the **`@objc dynamic var`** attribute to become accessors for the underlying database data.
@@ -81,7 +72,7 @@ var sortedItemRDtos = itemRDtos.sorted(byKeyPath: "title", ascending: true)
 		return "id"
 	}
 ```
-Realm will update the existing stored data with the new ones by looking for the primary key.
+Realm will update the existing stored data with the new ones by looking for its primary key.
 
 > Without this, you will have to delete all the persisted data and then persist the new ones; huge performance costs.
 

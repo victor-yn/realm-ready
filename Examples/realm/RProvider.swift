@@ -1,5 +1,5 @@
 //
-//  RealmProvider.swift
+//  RProvider.swift
 //  App
 //
 //  Created by Victor Yan on 04/05/2018.
@@ -35,7 +35,7 @@ class RealmProvider {
 	func getItems() -> Observable<[Item]> {
 		return Observable.create{ observer in
 			do {
-				let objects = self.realm.objects(ItemRealmDto.self)
+				let objects = self.realm.objects(ItemRDto.self)
 				let items = try self.itemsMapper.map(objects)
 				observer.onNext(items)
 				observer.onCompleted()
@@ -50,7 +50,7 @@ class RealmProvider {
 	func getItemById(_ id: String) -> Observable<Item> {
 		return Observable.create{ observer in
 			do {
-				let object = self.realm.objects(ItemRealmDto.self).filter("id = '\(id)'").first
+				let object = self.realm.objects(ItemRDto.self).filter("id = '\(id)'").first
 				let item = try self.itemsMapper.map(object)
 				observer.onNext(item)
 				observer.onCompleted()
@@ -65,7 +65,7 @@ class RealmProvider {
 	func clearItems() -> Observable<Void> {
 		return Observable.create({ (observer) -> Disposable in
 			do {
-				let itemsDto = self.realm.objects(ItemRealmDto.self)
+				let itemsDto = self.realm.objects(ItemRDto.self)
 				try self.realm.write {
 					self.realm.delete(itemsDto)
 				}

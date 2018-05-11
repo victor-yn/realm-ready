@@ -12,7 +12,7 @@ import Foundation
 class DataManager {
     static let shared = DataManager()
 
-    let realmProvider = RealmProvider()
+    let realmProvider = RProvider()
 	
 	fileprivate func _getRItems() -> Observable<[Item]> {
 		return realmProvider.getItems()

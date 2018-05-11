@@ -1,5 +1,5 @@
 //
-//  ItemRealmDto.swift
+//  ItemRDto.swift
 //  App
 //
 //  Created by Victor Yan on 04/05/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class ItemRealmDto : Object {
+class ItemRDto : Object {
 	@objc dynamic var id: String? = nil
 	@objc dynamic var title: String? = nil
 	@objc dynamic var _description: String? = nil
