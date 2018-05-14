@@ -5,11 +5,32 @@ This repo covers a basic ready-to-go implementation of RealmSwift in the iOS-sta
 
 The main purpose is to offer a fast -yet efficient- implementation of the persistance feature in the starter kit; for any further information, please check the [official Realm Documentation](https://www.realm.io/docs/swift/latest/).
 
+
 ## Installation
 
-Add `pod 'RealmSwift','~> 3.3.1'` in your Podfile and make the magic happen (`pod install`).
+This 3-min installation is made for the release `1.5.0` of the starter kit.
+ 1. Add `pod 'RealmSwift','~> 3.3.1'` in your Podfile and make the magic happen (`pod install`)
+ 
+ 2. [Download the files](https://github.com/victor-yn/realm-ready/archive/master.zip)
 
-## Examples
+ 3. Examples files are inside the `Examples` folder, 
+	 4. Copy all functions from [`DataManager`](https://github.com/victor-yn/realm-ready/blob/master/Examples/DataManager.swift) in your `DataManager`.
+	 5. In Xcode, go to `starterkit/core/data/provider/`, right-click on `provider` and `Add files to "starterkit"` and choose that `realm` folder from the `Examples` folder.
+	 6. Check `Create groups` (instead of `Create reference`). If `Create groups` is not visible, click on `Options` at the bottom.
+ 7. All files are added. Your app now supports persistance.
+
+From now on you are ready to go.
+
+------------------------------
+------------------------------
+
+**TO GO FURTHER**
+
+------------------------------
+------------------------------
+
+
+## Example files
 
 - **DataManager**
 - *Realm*
@@ -22,21 +43,11 @@ Add `pod 'RealmSwift','~> 3.3.1'` in your Podfile and make the magic happen (`po
 > R will now stand for Realm, AF for Alamofire.
 > ItemDto : `ItemRDto` / `ItemAFDto`
 
-The example files can easily be added to your project; to do that just download the files (`Clone or download` -> `Download ZIP`). 
+It will show you the implementation for fetching / saving and clearing data. 
 
-It will show you the implementation for fetching / saving and clearing data. From now on you're ready to go.
-
-
-------------------------------------------------------------
-------------------------------------------------------------
-------------------------------------------------------------
-------------------------------------------------------------
-------------------------------
-------------------------------
 ## Models
 
 Models will be persisted as DTOs. 
-
 
 ![mermaid graph](https://image.ibb.co/cPEqbJ/azzzz.png)
 >Persisting objects (DTOs) must subclass **`Object`**
