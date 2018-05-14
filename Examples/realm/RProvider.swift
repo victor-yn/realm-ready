@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RealmSwift
 
-class RealmProvider {
+class RProvider {
 	
 	let realm = try! Realm()
 	let itemsMapper = ItemRMapper()
