@@ -4,8 +4,9 @@
 **Cool stuff coming soon........**
 
 TODO : 
+- File sources
 - Example project
-- Heavy migration
+- More examples
 
 # Lightweight Migration
 
@@ -78,6 +79,7 @@ if oldSchemaVersion < 3 {
 ## Migration (0 -> 3)
 
 **Migration.swift**
+
 ```Swift
 import Foundation
 import RealmSwift

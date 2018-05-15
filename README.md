@@ -14,9 +14,13 @@ This 3-min installation is made for the **release `1.5.0`** of the starter kit.
  2. [Download the files](https://github.com/victor-yn/realm-ready/archive/master.zip)
 
  3. Examples files are inside the `Examples` folder, 
-	 4. Copy all functions from [`DataManager`](https://github.com/victor-yn/realm-ready/blob/master/Examples/DataManager.swift) in your `DataManager`.
-	 6. In Xcode, go to `starterkit/core/data/provider/`, right-click on `provider` and `Add files to "starterkit"`
-	 7.  Add the complete `realm` folder from  `Examples`. Tick `Create groups` (instead of `Create reference`). *If `Create groups` is not visible, click on `Options` at the bottom.*
+ 
+	 1- Copy all functions from [`DataManager`](https://github.com/victor-yn/realm-ready/blob/master/Examples/DataManager.swift) in your `DataManager`.
+	 
+	 2- In Xcode, go to `starterkit/core/data/provider/`, right-click on `provider` and `Add files to "starterkit"`
+	 
+	 3-  Add the complete `realm` folder from  `Examples`. Tick `Create groups` (instead of `Create reference`). *If `Create groups` is not visible, click on `Options` at the bottom.*
+	 
  7. All files are added. Your starter-kit now supports persistance.
 
 From now on you are ready to go.
@@ -116,4 +120,4 @@ This will update existing `dto` objects in the database, looked up by its primar
 
 ## Migration
 
-[Coming soon](https://www.realm.io/docs/swift/latest/#migrations)
+[Check the Migration folder](https://github.com/victor-yn/realm-ready/tree/master/Migration)
