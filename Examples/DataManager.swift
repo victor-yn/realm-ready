@@ -14,6 +14,36 @@ class DataManager {
 
     let realmProvider = RProvider()
 	
+	//Replace _getItems() with this function
+	fileprivate func _getItems() -> Observable<[Item]> {
+		return self._getItemsFromCache()
+			.catchError({ _ -> Observable<[Item]> in
+				return self._getItemsFromRealm()
+					.catchError({ _ -> Observable<[Item]> in
+						return self._getItemsFromNetwork()
+					})
+			})
+	}
+	
+	fileprivate func _getItemsFromCache() -> Observable<[Item]> {
+		return memoryCacheProvider.getItems()
+	}
+	
+	fileprivate func _getItemsFromRealm() -> Observable<[Item]> {
+		return realmProvider.getItems()
+			.do(onNext:{ (items) in
+				self.memoryCacheProvider.saveItems(items)
+			})
+	}
+	
+	fileprivate func _getItemsFromNetwork() -> Observable<[Item]> {
+		return networkProvider.getItems()
+			.do(onNext:{ (items) in
+				self.memoryCacheProvider.saveItems(items)
+				self.realmProvider.saveItems(items)
+			})
+	}
+	
 	fileprivate func _getRItems() -> Observable<[Item]> {
 		return realmProvider.getItems()
 	}
@@ -22,8 +52,8 @@ class DataManager {
 		return realmProvider.getItemById(id)
 	}
 	
-	fileprivate func _saveRItems(_ items: [Item]) -> Observable<Void> {
-		return realmProvider.saveItems(items)
+	fileprivate func _saveRItems(_ items: [Item]) {
+		realmProvider.saveItems(items)
 	}
 	
 	fileprivate func _deleteRItems(_ items: [Item]) -> Observable<Void> {
@@ -49,7 +79,7 @@ extension DataManager {
 		return self._getRItemById(id)
 	}
 	
-	func saveRItems(_ items: [Item]) -> Observable<Void> {
+	func saveRItems(_ items: [Item]) {
 		return self._saveRItems(items)
 	}
 	

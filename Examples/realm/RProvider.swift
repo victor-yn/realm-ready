@@ -15,27 +15,11 @@ class RProvider {
 	let realm = try! Realm()
 	let itemsMapper = ItemRMapper()
 	
-	func saveItems(_ incoming: [Item]) -> Observable<Void> {
-		return Observable.create({ (observer) -> Disposable in
-			do {
-				let dtos = self.itemsMapper.map(incoming)
-				try self.realm.write {
-					self.realm.add(dtos, update: true)
-				}
-				observer.onNext(())
-				observer.onCompleted()
-			}
-			catch let error as NSError {
-				observer.onError(error)
-			}
-			return Disposables.create()
-		})
-	}
-	
 	func getItems() -> Observable<[Item]> {
 		return Observable.create{ observer in
 			do {
 				let objects = self.realm.objects(ItemRDto.self)
+				guard !objects.isEmpty else { throw NSError() }
 				let items = try self.itemsMapper.map(objects)
 				observer.onNext(items)
 				observer.onCompleted()
@@ -99,6 +83,13 @@ class RProvider {
 		})
 	}
 	
+	func saveItems(_ incoming: [Item]) {
+		let dtos = self.itemsMapper.map(incoming)
+		try! self.realm.write {
+			self.realm.add(dtos, update: true)
+		}
+	}
+	
 	func clear() -> Observable<Void> {
 		return Observable.create({ (observer) -> Disposable in
 			do {
@@ -115,3 +106,4 @@ class RProvider {
 		})
 	}
 }
+

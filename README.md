@@ -1,4 +1,6 @@
 ﻿![realm-logo](https://github.com/realm/realm-cocoa/raw/master/logo.png)
+
+![starter kit badge](https://img.shields.io/badge/starter--kit-1.5.0-brightgreen.svg) ![super cool badge](https://img.shields.io/badge/tutorial-super%20cool-ff69b4.svg)
 # Realm Ready
 
 This repo covers a basic ready-to-go implementation of RealmSwift in the iOS-starter-kit.
@@ -8,10 +10,11 @@ The main purpose is to offer a fast -yet efficient- implementation of the persis
 
 ## Installation
 
-This 3-min installation is made for the **release `1.5.0`** of the starter kit.
+This 3-min installation is made for the **release [`1.5.0`](https://github.com/DevoteamDigitalFactory/ddf-starter-ios/tree/1.5.0)** of the starter kit.
+
  1. Add `pod 'RealmSwift','~> 3.3.1'` in your Podfile and make the magic happen (`pod install`)
  
- 2. [Download the files](https://github.com/victor-yn/realm-ready/archive/master.zip)
+ 2. [Download the files](https://github.com/victor-yn/realm-ready/archive/master.zip
 
  3. Examples files are inside the `Examples` folder, 
  
@@ -21,7 +24,8 @@ This 3-min installation is made for the **release `1.5.0`** of the starter kit.
 	 
 	 3-  Add the complete `realm` folder from  `Examples`. Tick `Create groups` (instead of `Create reference`). *If `Create groups` is not visible, click on `Options` at the bottom.*
 	 
- 7. All files are added. Your starter-kit now supports persistance.
+ 4. All files are added, your starter-kit now supports persistance. 
+	 At this point, it will try getting data from the cache; if empty, it will try fetching data from the database and store it in the cache; if empty, fetch data from the network and store it in both cache and database.
 
 From now on you are ready to go.
 
