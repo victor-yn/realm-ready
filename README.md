@@ -14,7 +14,7 @@ This 3-min installation is made for the **release [`1.5.0`](https://github.com/D
 
  1. Add `pod 'RealmSwift','~> 3.3.1'` in your Podfile and make the magic happen (`pod install`)
  
- 2. [Download the files](https://github.com/victor-yn/realm-ready/archive/master.zip
+ 2. [Download the files](https://github.com/victor-yn/realm-ready/archive/master.zip)
 
  3. Examples files are inside the `Examples` folder, 
  
